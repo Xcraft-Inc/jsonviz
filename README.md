@@ -1,3 +1,7 @@
+# FORK
+
+Remove the dependency on vis.js. This fork can be used only to generate DOT.
+
 # jsonviz
 
 A Node.js module that converts *JSON* to *DOT language* and can create [*GraphViz*](http://www.graphviz.org/)

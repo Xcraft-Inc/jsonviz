@@ -1,7 +1,7 @@
 "use strict";
 
-var raw = require("jsonviz/raw.class"),
-    html = require("jsonviz/html.class");
+var raw = require("./raw.class"),
+    html = require("./html.class");
 
 // ----------------------- Private Functions ----------------------- //
 // Declared before the public ones to link them in the exported object

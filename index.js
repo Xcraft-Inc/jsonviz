@@ -2,8 +2,7 @@
 
 // ------------ Requirements ------------ //
 
-var Viz = require("viz.js"),
-    fs = require("fs"),
+var fs = require("fs"),
     util = require("./util.js");
 
 // ------------------------------------------- //
@@ -29,25 +28,6 @@ function JSONGraph(opts)
 JSONGraph.import = function(json)
 {
     return new JSONGraph(__getJSON(json));
-};
-
-JSONGraph.generate = function(opts, dotOpts, path, cb)
-{
-    if(typeof(opts) == "string")
-    {
-        opts = __getJSON(opts);
-    }
-    if(typeof(dotOpts) == "string")
-    {
-        cb = path;
-        path = dotOpts;
-        dotOpts = undefined;
-    }
-    if(path)
-    {
-        return new JSONGraph(opts).save(path, dotOpts, cb);
-    }
-    return new JSONGraph(opts).generate(dotOpts);
 };
 
 JSONGraph.extends = function(modName)
@@ -82,34 +62,6 @@ JSONGraph.prototype.dot = function()
         this._computedDot = this._dot("");
     }
     return this._computedDot;
-};
-
-JSONGraph.prototype.generate = function(dotOpts)
-{
-    var d = this.dot(), o;
-    try
-    {
-        o = Viz(d, dotOpts);
-        o = new JSONGraph.SVG(o);
-        __addCSS(o, this.css);
-    }
-    catch(e)
-    {
-        throw new Error("Error while generating the dot graph.\nGraph:\n" + d + "\n\n" + e);
-    }
-    return o;
-};
-
-JSONGraph.prototype.svg = JSONGraph.prototype.generate;
-
-JSONGraph.prototype.save = function(path, dotOpts, cb)
-{
-    if(dotOpts && typeof(dotOpts) != "object")
-    {
-        cb = dotOpts;
-        dotOpts = undefined;
-    }
-    return this.generate(dotOpts).save(path, cb);
 };
 
 JSONGraph.prototype.clone = function(name)
@@ -339,19 +291,11 @@ Object.defineProperties(JSONGraph.prototype,
 });
 
 // ---------------------------------------------- //
-// ------------ CLASS JSONGraph.SVG ------------ //
-
-Object.defineProperty(JSONGraph, "SVG",
-{
-    value: require("jsonviz/svg.class")
-});
-
-// ---------------------------------------------- //
 // -------------- CLASS JSONGraph.HTML -------------- //
 
 Object.defineProperty(JSONGraph, "HTML",
 {
-    value: require("jsonviz/html.class")
+    value: require("./html.class")
 });
 
 // ---------------------------------------------- //
@@ -359,7 +303,7 @@ Object.defineProperty(JSONGraph, "HTML",
 
 Object.defineProperty(JSONGraph, "Raw",
 {
-    value: require("jsonviz/raw.class")
+    value: require("./raw.class")
 });
 
 // -------------- PRIVATE -------------- //
@@ -414,17 +358,6 @@ function __structElt(e)
 function __struct(a)
 {
     return a.map(__structElt).join(" | ");
-}
-
-// --> SVG
-
-function __addCSS(svg, css)
-{
-    var s = util.css(css);
-    if(s)
-    {
-        svg.text = svg.text.replace(/<svg[\s\n](.|\n)*?>/, "$&\n<style>" + s + "</style>");
-    }
 }
 
 // -------------- EXPORTS THE MODULE -------------- //

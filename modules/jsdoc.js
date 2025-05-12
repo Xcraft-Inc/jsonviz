@@ -1,4 +1,4 @@
-var util = require("jsonviz/util");
+var util = require("../util");
 
 exports = module.exports = function(JSONGraph)
 {

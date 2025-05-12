@@ -1,14 +1,15 @@
 {
-  "name": "jsonviz",
-  "version": "0.2.2",
-  "description": "A Node.js module that converts JSON to DOT language and can create GraphViz graphics with viz.js (without installing GraphViz)",
+  "name": "xcraft-jsonviz",
+  "version": "0.3.0",
+  "description": "A Node.js module that converts JSON to DOT language",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HaroldRitter/jsonviz.git"
+    "url": "git+https://github.com/Xcraft-Inc/jsonviz.git"
   },
   "keywords": [
     "JSON",
@@ -19,10 +20,7 @@
   "author": "Harold Ritter <harold.ritter@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HaroldRitter/jsonviz/issues"
+    "url": "https://github.com/Xcraft-Inc/jsonviz/issues"
   },
-  "dependencies": {
-    "viz.js": "~1.8.0"
-  },
-  "homepage": "https://github.com/HaroldRitter/jsonviz#readme"
+  "homepage": "https://github.com/Xcraft-Inc/jsonviz#readme"
 }
